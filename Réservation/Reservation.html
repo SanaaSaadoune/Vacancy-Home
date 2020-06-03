@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Réservation</title>
+    <link href="Style.css" rel="stylesheet">
+    
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="nav">
+            <input type="checkbox" id="check"/>
+            <label for="check">
+                 <a id="btn">&#9776;</a>
+                 <a id="cancel">&#10799;</a>
+              
+            </label>
+            <img src="Images/logo.png" alt="logo" class="resp">
+             <div class="sidebar">
+                 
+                <div class="menu">
+                    <img src="Images/logo.png" alt="logo">
+                    <div class="menu1">
+                        <a  href="../Galerie/Location.html"> Home </a>
+                        <a  href="../Galerie/Location.html"> Galerie </a>
+                        <a  href="../Galerie/Location.html"> Contact </a>
+                        <input type="button" value="Se connecter" class="btnConnexion">
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        </header>
+
+   
+    <div class="slider">
+        <img class="slide" src='Images/P1.jpg' alt="img">
+        <img class="slide" src='Images/P2.jpg' alt="img">
+        <img class="slide" src='Images/P3.jpg' alt="img">
+        <img class="slide" src='Images/P4.jpg' alt="img">
+        <img class="slide" src='Images/P5.jpg' alt="img">
+        <img class="slide" src='Images/P6.jpg' alt="img">
+    </div>
+        
+    
+    
+
+    <form method="post" action="traitement.php" >
+        <fieldset class="f1">
+            <h2 style="text-decoration: underline;"> Formulaire de réservation :</h2>
+            <div id="imgPreview"></div>
+            <table>
+                <tr> <td> <label for="cin"> Votre CIN : </label></td> <td> <input type="text"  style="text-transform: uppercase" id="cin"> </td><td><span  id="1"></span> </td></tr>
+
+                <tr> <td> <label for="nom"> Votre nom : </label></td> <td> <input type="text" style="text-transform: uppercase" id="nom"> </td><td><span  id="2"></span> </td></tr> 
+
+                <tr> <td><label for="date"> Votre date de naissance : </label> </td><td><input type="date" id="date"></td><td>  <span  id="3"></span></td></tr>
+                
+                <tr><td><label for="datedebut"> Date début de location : </label> </td> <td><input  type="date" id="datedebut"></td><td> <span  id="4"></span> </td></tr> 
+
+                <tr><td><label for="datefin"> Date fin de location : </label> </td> <td><input  type="date" id="datefin"></td><td> <span  id="5"></span> </td></tr> 
+                
+                <tr><td><label for="nbr"> Nombre de personnes : </label></td> <td> <input type="number" id="nbr"></td><td> <span  id="6"></span></td></tr>
+                
+            </table>
+            <input type="button"  class="btn" value="Réserver" onclick="Valider(),check()"> 
+        </fieldset>
+    </form>
+
+    <div class="espace">
+        
+    </div>
+    <div class="espace">
+        
+    </div>
+    <script src="script.js"></script> 
+
+    <!-- Formulaire de validation -->
+    <form method="post" action="traitement.php" id="validation">
+        <fieldset>
+            <h2> Valider vos informations :</h2>
+            <div id="champ1"> Votre CIN est : </div>
+            <div id="champ2"> Votre nom est : </div>
+            <div id="champ3"> Votre age est : </div>
+            <div id="champ4"> La période de location est : </div>
+            <div id="champ5"> Le nombre de personnes est : </div>
+            
+            <input type="button" value="Valider" class="btn close">
+        </fieldset>
+    </form>
+
+
+   
+    
+    <!-- Footer -->
+    <footer>
+
+        <div class="footer1">
+                <div class="block">  
+                        <img class="logo" src="Images/logo2.png" alt="logo">
+                        <p> Suivez-nous sur les réseaux sociaux</p>
+                        <a><img id="facebook" src="Images/facebook.png" alt="facebook" ></a>
+                        <a ><img src="Images/twitt.png" alt="twitter" ></a>
+                        <a><img src="Images/linkedin-in.png" alt="linkedin" ></a>
+                </div>
+
+                <div class="block"> 
+                        <strong>QUICK LINKS</strong>
+                        <p>HOME</p>
+                        <p>ABOUT US</p>
+                        <p>CITY GUIDE</p>
+                        <p>BLOG</p>
+                        <p>FAQ's</p>
+                </div>
+
+                <div class="block">
+                        <strong>CONTACT US</strong>
+                        <p>Feel free to get in touch with us via phone or send<br> us a message</p>
+                        <div class="contact">
+                        <p><strong>Vacancy_Home@gmail.com</strong></p>
+                        </div>
+                </div>
+        </div> 
+       
+        <div class="copy"> 
+            <p> @Copyright 2019. All Right Reserved </p >
+        </div>      
+    </footer>
+
+
+
+        <!-- Code script -->
+        <script>
+            var btnValider = document.getElementsByClassName("close")[0];
+            var modal = document.getElementById("validation");
+
+            var cin =document.getElementById('cin');
+            var nom =document.getElementById('nom');
+            var date =document.getElementById('date');
+            var periode =document.getElementById('periode');
+            var nbr =document.getElementById('nbr');
+            var cpt=0;
+
+            function Valider(){
+                cpt=0;
+                if(cin.value=="" ) document.getElementById('1').innerHTML= "Remplir le CIN "; 
+                else {
+                    document.getElementById('1').innerHTML=" ";
+                    cpt++;
+                }
+                if( nom.value=="" ) document.getElementById('2').innerHTML= "Remplir le nom "; 
+                else {
+                    document.getElementById('2').innerHTML=" ";
+                    cpt++;
+                }
+                if( date.value=="" ) document.getElementById('3').innerHTML= "Remplir la date de naissance "; 
+                else {
+                    document.getElementById('3').innerHTML=" ";
+                    cpt++;
+                }
+                if( datedebut.value=="" ) document.getElementById('4').innerHTML= "Remplir la date debut "; 
+                else {
+                    document.getElementById('4').innerHTML=" ";
+                    cpt++;
+                }
+                if( datefin.value=="" ) document.getElementById('5').innerHTML= "Remplir la date fin"; 
+                else if(datefin.value<datedebut.value) document.getElementById('5').innerHTML="Date fin doit être supérieure de date début";
+                else {
+                    document.getElementById('5').innerHTML=" ";
+                    cpt++;
+                }
+                if( nbr.value=="" ) document.getElementById('6').innerHTML = "Remplir le nombre";
+                else {
+                    document.getElementById('6').innerHTML=" ";
+                    cpt++;
+                }
+                console.log(cpt);
+                return cpt;    
+            }
+            function getAge(date) { 
+                var diff = Date.now() - date.getTime();
+                var age = new Date(diff); 
+                return Math.abs(age.getUTCFullYear() - 1970);
+             }
+
+             function diffdate(d1,d2){
+                var WNbJours = d2.getTime() - d1.getTime();
+                return Math.ceil(WNbJours/(1000*60*60*24));
+            }
+
+            function check(){
+                if(cpt==6)
+                {
+                        document.getElementById("validation").style.display="block";
+                        document.getElementById('champ1').innerHTML += cin.value;
+                        document.getElementById('champ2').innerHTML += nom.value;
+                        document.getElementById('champ3').innerHTML += getAge(new Date(date.value));
+                        document.getElementById('champ4').innerHTML += diffdate(new Date(datedebut.value),new Date(datefin.value)) +" jours";
+                        document.getElementById('champ5').innerHTML += nbr.value;
+                        cin.value="";
+                        nom.value="";
+                        date.value="";
+                        datedebut.value="";
+                        datefin.value="";
+                        nbr.value="";
+                }
+            }
+
+
+            window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+            btnValider.onclick = function() {
+                modal.style.display = "none";
+                alert('Votre demande est effectuée !');
+                document.getElementById('champ1').innerHTML ="Votre CIN est : ";
+                document.getElementById('champ2').innerHTML = "Votre nom est : ";
+                document.getElementById('champ3').innerHTML = "Votre age est : ";
+                document.getElementById('champ4').innerHTML = "La période de location est : ";
+                document.getElementById('champ5').innerHTML = "Le nombre de personnes est : ";
+            }
+        }
+        </script>
+
+
+</body>
+</html>

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Location maisons</title>
+    <link href="Style.css" rel="stylesheet">
+</head>
+<body>
+       
+        <header>
+            <div class="nav">
+                <input type="checkbox" id="check"/>
+                <label for="check">
+                     <a id="btn">&#9776;</a>
+                     <a id="cancel">&#10799;</a>
+                </label>
+                <img class="resp"src="Images/logo.png" alt="logo" >
+                 <div class="sidebar">
+                     
+                    <div class="menu">
+                        <img src="Images/logo.png" alt="logo">
+                        <div class="menu1">
+                            <a  class="home" href=""> Home </a>
+                            <a  href="#gal"> Galerie </a>
+                            <a  href="#contact"> Contact </a>
+                            <input type="button" value="Se connecter" class="btnConnexion">
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            
+        <form method="post" action="traitement.php" id="validation" >
+            <fieldset id="f1">
+                <h2> Formulaire d'inscription :</h2>
+                <p style="text-align: center; color:purple"> (Inscris-toi pour recevoir toutes les nouvelles) </p>
+                <table>
+                    <tr> <td> <label for="nom"> Nom : </label></td> <td> <input type="text" id="nom"> </td><td><span  id="1"></span> </td></tr> 
+                  
+                    <tr> <td> <label for="prenom"> Prénom : </label></td> <td><input type="text" id="prenom"></td><td><span  id="2"></span></td></tr> 
+
+                    <tr> <td><label for="age"> Age : </label> </td><td><input type="number" id="age"></td><td>  <span  id="3"></span></td></tr>
+                    
+                    <tr><td><label for="tel"> Tel : </label> </td> <td><input type="text" id="tel"></td><td> <span  id="5"></span> </td></tr> 
+                    
+                    <tr><td><label for="email"> Email : </label></td> <td> <input type="text" id="email"></td><td> <span  id="4"></span></td></tr>
+                    
+                    <tr> <td><label for="mdp"> Password : </label></td> <td> <input type="text" id="mdp"> </td><td> <span id="6"></span></td></tr> 
+                   
+                    <tr><td><label for="cmdp"> Confirmation : </label> </td> <td><input type="text" id="cmdp"></td> <td><span  id="7"></span> </td></tr>
+                    
+                </table> 
+                <input type="button"  class="btn close" value="S'inscrire" onclick="Valider(),Valider2()"> 
+                <input type="button"  class="btn annuler" value="Annuler" onclick="Annuler()"> 
+                
+            </fieldset>
+        </form>
+
+        <form method="post" action="traitement.php" id="connexion" >
+            <fieldset id="f1">
+                <p> <img src="Images/cnx.jpg" alt="user"> </p>
+                <table>
+                    <tr> <td> <label for="email"> Email : </label></td> <td> <input type="text" id="email" required> </td></tr> 
+                  
+                    <tr> <td> <label for="password"> Password : </label></td> <td><input type="password" id="password" required></td></tr>
+
+                    <tr> <td colspan="2"> <a class="lien" onclick="inscription()"> Pas encore inscris? Inscris-toi maintement! </a></td></tr>
+                </table>
+                <input type="submit"  class="btn close" value="Connexion" > 
+                <input type="button"  class="btn annuler" value="Annuler" onclick="Annuler()"> 
+                
+            </fieldset>
+        </form>
+
+
+        <!-- Code script -->
+        <script>
+            var btnCnx = document.getElementsByClassName("btnConnexion")[0];
+            var btnValider = document.getElementsByClassName("close")[0];
+            var modal = document.getElementById("validation");
+            var connexion= document.getElementById("connexion");
+            var nom =document.getElementById('nom');
+            var prenom =document.getElementById('prenom');
+            var email =document.getElementById('email');
+            var password =document.getElementById('mdp');
+            var confirmation =document.getElementById('cmdp');
+            var tel =document.getElementById('tel');
+            var cpt=0;
+
+            function inscription() {
+                modal.style.display = "block";
+                connexion.style.display = "none";
+            }
+
+            btnCnx.onclick = function() {
+                connexion.style.display = "block";
+            }
+
+            function Valider(){
+                cpt=0;
+                var rgxEmail =/^[A-Za-z0-9-_.]+@[A-Za-z]{4,9}.[A-Za-z]{2,3}$/;
+                var rgx=/^[0][5-7-6][0-9]{8}$/;
+                if(nom.value=="" ) document.getElementById('1').innerHTML= "Remplir le nom "; 
+                else {
+                    document.getElementById('1').innerHTML=" ";
+                    cpt++;
+                }
+                if( prenom.value=="" ) document.getElementById('2').innerHTML= "Remplir le prénom "; 
+                else {
+                    document.getElementById('2').innerHTML=" ";
+                    cpt++;
+                }
+                if( age.value=="" ) document.getElementById('3').innerHTML= "Remplir l'âge "; 
+                else {
+                    document.getElementById('3').innerHTML=" ";
+                    cpt++;
+                }
+                if( email.value=="" ) document.getElementById('4').innerHTML= "Remplir l'email "; 
+                else if(!rgxEmail.test(email.value)) document.getElementById('4').innerHTML = "Format incorrect";
+                else {
+                    document.getElementById('4').innerHTML=" ";
+                    cpt++;
+                }
+                if( tel.value=="" ) document.getElementById('5').innerHTML = "Remplir le numéro ";
+                else if(!rgx.test(tel.value)) document.getElementById('5').innerHTML="tel incorrect";
+                else {
+                    document.getElementById('5').innerHTML=" ";
+                    cpt++;
+                }
+                if( password.value=="" ) document.getElementById('6').innerHTML= "Remplir le mdp";
+                else {
+                    document.getElementById('6').innerHTML=" ";
+                    cpt++;
+                }
+                if( confirmation.value=="" ) document.getElementById('7').innerHTML= "Remplir la confirmation";
+                if(password.value != confirmation.value) document.getElementById('7').innerHTML="Confirmation incorrecte";   
+                else {
+                    document.getElementById('7').innerHTML=" ";
+                    cpt++;
+                }
+                return cpt;    
+            }
+            
+            function Valider2(){
+            console.log(cpt);
+                if(cpt==7)
+                {
+                modal.style.display = "none";
+                alert('Inscription bien effectuée !');
+                nom.value="";
+                        prenom.value="";
+                        age.value="";
+                        tel.value="";
+                        email.value="";
+                        password.value="";
+                        confirmation.value="";
+                }
+            }
+            
+            function Annuler(){
+                modal.style.display = "none";
+                connexion.style.display="none"
+            }
+
+        </script>
+        <!-- Fin script -->
+        <div class="Part1">
+            <div class="parag1">
+                <h2> Enjoy your dream vacation  </h2>
+                <p>Profitez de vos vacances pour vous octroyer une pause de détente et de confort !</p>
+            </div>
+        </div>
+    </header> 
+        <div class="espace">
+            
+        </div>
+        <nav> 
+            <div class="parags">
+                <div class="def">
+                    <h1> Qui sommes nous ? </h1>
+                    <p> <b> Vacancy Home </b> est une agence de location de maisons de vacances.
+                        Ici vous pouvez réservez une maison de vacances rien que pour vous ! 
+                        Sur notre site, découvrez plus de 50.000 maisons individuelles, villas avec piscine privée, gîtes 
+                        et chalets à louer pour vos vacances et séjours.
+                    </p>
+                </div>
+                <div class="choix">
+                    <h1> Pourquoi nous choisir ? </h1>
+                    <p> Nous vous offrons une diversité de destinations avec une meilleure qualité, et surtout avec un prix convenable.
+                        Notre agence est ouverte chaque jour 24h/7 juste pour vous. Soyez les bienvenus !
+                    </p>
+                </div>
+            </div>
+            <div class="espace">
+
+            </div>
+            <div class="destinations">
+                <h1> Parmis nos meilleures destinations :</h1>
+                <div class="images">
+                    <div class="image1">  <p class="descr1"> Hawaï</p> </div>
+                    <div class="image2">  <p class="descr2"> Turquie </p></div>
+                    <div class="image3">  <p class="descr3"> Maroc </p></div>
+                    <div class="image4">  <p class="descr4"> Italie </p></div>
+                </div>
+            </div>
+            <div class="espace">
+            
+            </div>
+            
+            <h1 id="gal"> Galerie </h1>
+            <div class="galerie">
+                <div class="main-slider">
+                    <div class="fimage">
+                        <img id="image" src="Images/mais1.jpg" alt="holder" class="img-slider">
+                        <div class="img-controller">
+                            <div class="nav-icon">
+                                <i class="fa fa-chevron-left" style="font-size:36px"></i>
+                                <i class="fa fa-chevron-right" style="font-size:36px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <ul>
+                            <li> <b>Description</b> : Le Domaine de Fontenelles 2, Maison 6 personnes, 64 m², 2 chambres, 1 salle de bain, piscine</li>
+                            <li> <b>Adresse</b> : St. Gilles Croix De Vie,Vendée, Pays de la Loire, France.</li>
+                            <li> <b>Prix</b> : 357 € par semaine</li>
+                        </ul>
+                        <a href="../Réservation/Reservation.html" class="reservBtn"><button> Réserver </button></a> 
+                    </div>
+                </div>
+
+                <div class="main-slider">
+                    <div class="fimage">
+                        <img id="image1" src="Images/maison2.jpg" alt="holder" class="img-slider">
+                        <div class="img-controller">
+                            <div class="nav-icon">
+                                <i class="fa fa-chevron-left" style="font-size:36px"></i>
+                                <i class="fa fa-chevron-right" style="font-size:36px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <ul>
+                            <li> <b>Description</b> : Watsi, Maison 8 personnes à Calpe Calp, 180 m², 4 chambres, 3 salles de bain, Piscine Privée</li>
+                            <li> <b>Adresse</b> : Calpe, Costa Blanca, Région de Valence, Espagne.</li>
+                            <li> <b>Prix</b> : 1147 € par semaine</li>
+                        </ul>
+                        <a href="../Réservation/Reservation.html" class="reservBtn"><button> Réserver </button></a>
+                    </div>
+                </div>
+
+                <div class="main-slider">
+                    <div class="fimage">
+                        <img id="image2" src="Images/maiso1.jpg" alt="holder" class="img-slider">
+                        <div class="img-controller">
+                            <div class="nav-icon">
+                                <i class="fa fa-chevron-left" style="font-size:36px"></i>
+                                <i class="fa fa-chevron-right" style="font-size:36px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <ul>
+                            <li> <b>Description</b> : Borgo Ulisse Casa dei Conigli, 3 personnes, 60 m², 2 chambres, 1 salle de bain, piscine</li>
+                            <li> <b>Adresse</b> :  Ville Aci Catena, Acireale, Catane, Sicile, Italie.</li>
+                            <li> <b>Prix</b> : 690 € par semaine</li>
+                        </ul>
+                        <a href="../Réservation/Reservation.html" class="reservBtn"><button> Réserver </button></a>
+                    </div>
+                </div>
+                    
+                <div class="main-slider">
+                    <div class="fimage">
+                        <img id="image3" src="Images/m1.jpg" alt="holder" class="img-slider">
+                        <div class="img-controller">
+                            <div class="nav-icon">
+                                <i class="fa fa-chevron-left" style="font-size:36px"></i>
+                                <i class="fa fa-chevron-right" style="font-size:36px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <ul>
+                            <li> <b>Description</b> : Finca Can Palerm, Maison 10 personnes à San José, 180 m², 5 chambres, 3 salles de bain, piscine privée</li>
+                            <li> <b>Adresse</b> : Ville San José, Sant Josep de sa Talaia, Île d'Ibiza , Baléares, Espagne.</li>
+                            <li> <b>Prix</b> : 2791 € par semaine</li>
+                        </ul>
+                        <a href="../Réservation/Reservation.html" class="reservBtn"><button> Réserver </button></a>
+                    </div>
+                </div>
+
+                <div class="main-slider">
+                    <div class="fimage">
+                        <img id="image4" src="Images/ma1.jpg" alt="holder" class="img-slider">
+                        <div class="img-controller">
+                            <div class="nav-icon">
+                                <i class="fa fa-chevron-left" style="font-size:36px"></i>
+                                <i class="fa fa-chevron-right" style="font-size:36px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <ul>
+                            <li> <b>Description</b> : Gite 2 personnes à Cubas à 2 personnes, 55 m², 1 chambre, 1 salle de bain, Piscine</li>
+                            <li> <b>Adresse</b> :  Ville Cubas, Fuentealbilla, Albacete, Castille La Manche, Espagne.</li>
+                            <li> <b>Prix</b> : 568 € par semaine</li>
+                        </ul>
+                        <a href="../Réservation/Reservation.html" class="reservBtn"><button> Réserver </button></a>
+                    </div>
+                </div>
+
+                <div class="main-slider">
+                    <div class="fimage">
+                        <img id="image5" src="Images/mai1.jpg" alt="holder" class="img-slider">
+                        <div class="img-controller">
+                            <div class="nav-icon">
+                                <i class="fa fa-chevron-left" style="font-size:36px"></i>
+                                <i class="fa fa-chevron-right" style="font-size:36px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <ul>
+                            <li> <b>Description</b> :  Maison 6 personnes à Costa Paradiso, 60 m², 2 chambres, 1 salle de bain, Piscine.</li>
+                            <li> <b>Adresse</b> :   Ville Costa Paradiso, Belvedere, Olbia Tempio, Sardaigne, Italie. </li>
+                            <li> <b>Prix</b> : 281 € par semaine</li>
+                        </ul>
+                        <a href="../Réservation/Reservation.html" class="reservBtn"><button> Réserver </button></a>
+                    </div>
+                </div>
+
+                <div class="main-slider">
+                    <div class="fimage">
+                        <img id="image6" src="Images/maison11.jpg" alt="holder" class="img-slider">
+                        <div class="img-controller">
+                            <div class="nav-icon">
+                                <i class="fa fa-chevron-left" style="font-size:36px"></i>
+                                <i class="fa fa-chevron-right" style="font-size:36px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <ul>
+                            <li> <b>Description</b> : Residence Villaggio Colombo 6, Bungalow 6 personnes à Andora, 42 m², 2 chambres, 1 salle de bain, Piscine.</li>
+                            <li> <b>Adresse</b> : Ville Andora, Savone, Ligurie, Italie.</li>
+                            <li> <b>Prix</b> : 215 € par semaine</li>
+                        </ul>
+                        <a href="../Réservation/Reservation.html" class="reservBtn"><button> Réserver </button></a>
+                    </div>
+                </div>
+
+                <div class="main-slider">
+                    <div class="fimage">
+                        <img id="image7" src="Images/maison111.jpg" alt="holder" class="img-slider">
+                        <div class="img-controller">
+                            <div class="nav-icon">
+                                <i class="fa fa-chevron-left" style="font-size:36px"></i>
+                                <i class="fa fa-chevron-right" style="font-size:36px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <ul>
+                            <li> <b>Description</b> : Maison 2 personnes à Kirchdorf, 60 m², 1 chambre, 1 salle de bain, piscine</li>
+                            <li> <b>Adresse</b> :  Ville  Kirchdorf, Basse Saxe, Allemagne.</li>
+                            <li> <b>Prix</b> : 203 € par semaine</li>
+                        </ul>
+                        <a href="../Réservation/Reservation.html" class="reservBtn"><button> Réserver </button></a>
+                    </div>
+                </div>
+
+                <div class="main-slider">
+                    <div class="fimage">
+                        <img id="image8" src="Images/maison1111.jpg" alt="holder" class="img-slider">
+                        <div class="img-controller">
+                            <div class="nav-icon">
+                                <i class="fa fa-chevron-left" style="font-size:36px"></i>
+                                <i class="fa fa-chevron-right" style="font-size:36px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <ul>
+                            <li> <b>Description</b> : Bungalow 6 personnes à Pedras del rei, 69 m², 2 chambres, 1 salle de bain, piscine</li>
+                            <li> <b>Adresse</b> :   Ville : Pedras del rei Santa Luzia, Algarve, Portugal.</li>
+                            <li> <b>Prix</b> : 695 € par semaine</li>
+                        </ul>
+                        <a href="../Réservation/Reservation.html" class="reservBtn"><button> Réserver </button></a>
+                    </div>
+                </div>
+
+
+                <div class="main-slider">
+                    <div class="fimage">
+                        <img id="image9" src="Images/h1.jpg" alt="holder" class="img-slider">
+                        <div class="img-controller">
+                            <div class="nav-icon">
+                                <i class="fa fa-chevron-left" style="font-size:36px"></i>
+                                <i class="fa fa-chevron-right" style="font-size:36px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <ul>
+                            <li> <b>Description</b> : Port-Bourgenay 8, Maison 6 personnes à Talmont Saint Hilaire, 2 chambres, 1 salle de bain, piscine</li>
+                            <li> <b>Adresse</b> :  Ville almont Saint Hilaire, Vendée, Pays de la Loire, France.</li>
+                            <li> <b>Prix</b> : 550 € par semaine</li>
+                        </ul>
+                        <a href="../Réservation/Reservation.html" class="reservBtn"><button> Réserver </button></a>
+                    </div>
+                </div>
+
+                <div class="main-slider">
+                    <div class="fimage">
+                        <img id="image10" src="Images/hom1.jpg" alt="holder" class="img-slider">
+                        <div class="img-controller">
+                            <div class="nav-icon">
+                                <i class="fa fa-chevron-left" style="font-size:36px"></i>
+                                <i class="fa fa-chevron-right" style="font-size:36px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <ul>
+                            <li> <b>Description</b> : Village Fuerteventura Origo Mare 4, 2 personnes, 37 m², 2 chambres, 1 salle de bain, piscine</li>
+                            <li> <b>Adresse</b> :  Ville Majanicho, Province de Las Palmas, Canaries, Espagne.</li>
+                            <li> <b>Prix</b> : 314 € par semaine</li>
+                        </ul>
+                        <a href="../Réservation/Reservation.html" class="reservBtn"><button> Réserver </button></a>
+                    </div>
+                </div>
+
+                <div class="main-slider">
+                    <div class="fimage">
+                        <img id="image11" src="Images/home1.jpg" alt="holder" class="img-slider">
+                        <div class="img-controller">
+                            <div class="nav-icon">
+                                <i class="fa fa-chevron-left" style="font-size:36px"></i>
+                                <i class="fa fa-chevron-right" style="font-size:36px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <ul>
+                            <li> <b>Description</b> : Casa do Tanque, Gite 2 personnes à Sao Luís, 25 m², 2 chambres, 1 salle de bain, piscine privée</li>
+                            <li> <b>Adresse</b> :  Ville São Luís,Code postal : 7630-435, Algarve, Portugal.</li>
+                            <li> <b>Prix</b> : 490 € par semaine</li>
+                        </ul>
+                        <a href="../Réservation/Reservation.html" class="reservBtn"><button> Réserver </button></a>
+                    </div>
+                </div>
+                <script src="script.js"></script>
+                
+            </div>
+            <div class="espace">
+            
+            </div>
+
+            <h1 id="contact"> Contactez-nous </h1>
+            <div class="contact">
+                <div class="sm">
+                        <div> <img src="Images/fb.png" alt="fb" class="fb"> </div>
+                        <div> Vacancy Home </div>
+                </div>
+                <div class="sm">
+                        <div> <img src="Images/email.png" alt="email"> </div>
+                        <div> Vacancy_Home@gmail.com </div>
+                </div>
+                <div class="sm">
+                        <div> <img src="Images/twitter.png" alt="twitter"> </div>
+                        <div> Vacancy Home</div>
+                </div>
+                <div class="sm">
+                        <div> <img src="Images/loc.png" class="loc" alt="loc"> </div>
+                        <div> 515 Agency, 803 10 Ave, Cold Lake, AB T9M 1H8, Canada </div>
+                </div>
+                <div class="sm">
+                        <div> <img src="Images/phone.png" alt="phone"> </div>
+                        <div class="phone"> +6 12345678</div>
+                </div>
+            </div>
+
+        </nav>
+        <div class="espace">
+        
+        </div>
+
+
+        <footer>
+            <div class="footer1">
+                    <div class="block">  
+                            <img src="Images/logo2.png" class="logo" alt="logo">
+                            <p> Suivez-nous sur les réseaux sociaux</p>
+                            <a><img id="facebook" src="Images/facebook.png" alt="facebook" ></a>
+                            <a ><img src="Images/twitt.png" alt="twitter" ></a>
+                            <a><img src="Images/linkedin-in.png" alt="linkedin" ></a>
+                    </div>
+                    <div class="block"> 
+                            <strong>QUICK LINKS</strong>
+                            <p>HOME</p>
+                            <p>ABOUT US</p>
+                            <p>CITY GUIDE</p>
+                            <p>BLOG</p>
+                            <p>FAQ's</p>
+                    </div>
+                    <div class="block">
+                            <strong>CONTACT US</strong>
+                            <p>Feel free to get in touch with us via phone or send<br> us a message</p>
+                            <div class="contact">
+                            <p><strong>Vacancy_home@gmail.com</strong></p>
+                            </div>
+                    </div>
+            </div> 
+            <div class="copy"> 
+                <p> @Copyright 2019. All Right Reserved </p >
+            </div>      
+        </footer>
+
+</body>
+</html>
